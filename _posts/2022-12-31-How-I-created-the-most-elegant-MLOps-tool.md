@@ -197,7 +197,7 @@ Lastly, I wanted to focus on safety as I have noticed that many libraries rely o
 
 I could go on about objectives, but this sets a good foundation.
 
-## The start of something exiting
+## The new solution
 I needed to clarify a lot of use cases in the beginning. However, one thing was clear as gold, and it was the API design.
 
 ### The API
