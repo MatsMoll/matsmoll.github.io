@@ -5,7 +5,7 @@ title: "How I created the most elegant MLOps tool"
 
 # How I created the most elegant MLOps tool
 
-I wanted to write about this topic for a while but struggled to frame it correctly. And finally, I landed on just telling the origin story, with some of its sub-stories visible in the final product. So grab a coffee, and let's start on how I created the most elegant MLOps tool.
+I wanted to write about this topic for a while but struggled to frame it correctly.  And finally, I landed on just telling the origin story, with some of its invisible sub-stories. So grab a coffee, and let's start on how I created the most elegant MLOps tool.
 
 ## The beginning
 
