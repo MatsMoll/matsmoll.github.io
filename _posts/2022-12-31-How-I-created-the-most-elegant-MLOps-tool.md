@@ -13,7 +13,7 @@ Before we dive into machine learning-related topics because the final MLOps tool
 
 ### Not so unrelated domain after all?
 
-Even though I ended up in the machine learning domain, I started developing iOS applications around ten years ago. I bought an iPod touch as a child and soon wanted to create applications. This interest continued for a while, and I got a job as an iOS developer after roughly three years of hobby development before graduating from high school.
+Even though I ended up in the machine learning domain, I started developing iOS applications around ten years ago. I bought an iPod touch as a child and soon wanted to create applications. This interest continued for a while, and I got a job as an iOS developer after roughly four years of hobby development before graduating from high school.
 
 The experience is necessary to mention, as it educated me on the importance of UX in software development. And I often find myself talking to developers that think UX is all about the graphics or only for frontend developers. But I'm afraid I have to disagree with this statement. I find programming principles like DRY, SOLID, and CLEAN code to describe UX principles in an opinionated and use-cases-specific way. This background led to a slight shock when starting to develop machine learning systems as I found the existing tooling to not focus on UX the same way as frontend tooling did. I want to write a post that dives more into the details here, but for this post. It was vital for me to focus on improving error prevention, improved contextual API -awareness, and -discoverability, and struck a nice balance between simplicity and flexibility.
 
