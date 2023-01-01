@@ -11,7 +11,7 @@ author:
     url: https://github.com/MatsMoll
   - title: email
     url: mailto:mats@mollestad
-
+highlighter: rouge
 plugins:
   - jemoji
   - jekyll-seo-tag

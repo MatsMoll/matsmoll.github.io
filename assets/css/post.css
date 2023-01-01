@@ -175,12 +175,12 @@ main {
 
 .content pre {
   background: var(--gray-3) !important;
-  padding: 1rem 2rem;
+  padding: 1rem 1.5rem;
   margin-bottom: 1.75rem;
 }
 
 .content code {
-  padding: 3px 5px;
+  /* padding: 3px 5px; */
   color: var(--white-2);
   white-space: pre;
   background-color: var(--gray-3);
