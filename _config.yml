@@ -1,11 +1,27 @@
-lsi: false
+# lsi: false
 title: Mats Eikeland Mollestad
-email: mats@mollestad.no
-safe: true
-incremental: false
-highlighter: rouge
-gist:
-  noscript: false
-kramdown:
-  math_engine: mathjax
-  syntax_highlighter: rouge
+author:
+  name: Mats Eikeland Mollestad
+  email: mats@mollestad.no
+  description: An ML Engineer that tries to write some times
+  contact:
+  - title: linkedin
+    url: https://www.linkedin.com/in/mats-e-mollestad/
+  - title: github
+    url: https://github.com/MatsMoll
+  - title: email
+    url: mailto:mats@mollestad
+
+plugins:
+  - jemoji
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+defaults:
+  - scope:
+      path: "_posts"
+    values:
+      layout: "post"
+      permalink: /posts/:title/
+exclude: ["sitemap.xml", "feed.xml", "LICENSE", "README.md"]

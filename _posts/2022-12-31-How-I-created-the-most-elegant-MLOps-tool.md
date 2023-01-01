@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "How I created the most elegant MLOps tool"
+permalink: /2022/12/31/How-I-created-the-most-elegant-MLOps-tool.html
+categories: [MLOps]
 ---
-
-# How I created the most elegant MLOps tool
 
 I wanted to write about this topic for a while but struggled to frame it correctly.  And finally, I landed on just telling the origin story, with some of its invisible sub-stories. So grab a coffee, and let's start on how I created the most elegant MLOps tool.
 
@@ -342,7 +342,7 @@ An HTTP push with the `HttpStreamSource` may make more sense for those without s
 ### Models
 Unlike Bender, this time, handling model training was not of priority. This priority was because I wanted better control of the foundational data. However, there was still interest in adding support for model use cases like a model. 
 
-```
+```python
 titanic_model = Model(
     features=[
         TitanicPassenger.select(lambda view: [
