@@ -59,8 +59,8 @@ main {
   font-weight: 300;
 }
 #text-wrapper a {
-  color: cyan;
-  border-bottom: 1px solid cyan;
+  color: var(--white-1);
+  border-bottom: 1px solid var(--white-1);
 }
 #social-wrapper {
   margin-top: 1rem;
@@ -91,9 +91,8 @@ main {
 }
 .articles .article .article-title,
 .articles .article .article-title a {
-  color: var(--white-2);
-  font-weight: 100;
-  font-style: italic;
+  color: var(--white-1);
+  font-weight: bold;
   font-size: 1.4rem;
   line-height: 130%;
 }
@@ -117,6 +116,7 @@ main {
   color: var(--gray-4);
   background: var(--white-2);
   border-radius: 15px;
+  font-weight: bold;
   font-size: 0.7rem;
   padding: 0 0.8rem;
   line-height: 1.3rem;

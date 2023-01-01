@@ -2,7 +2,7 @@
 layout: post
 title: "How I created the most elegant MLOps tool"
 permalink: /2022/12/31/How-I-created-the-most-elegant-MLOps-tool.html
-categories: [MLOps]
+categories: [Aligned, MLOps]
 ---
 
 I wanted to write about this topic for a while but struggled to frame it correctly.  And finally, I landed on just telling the origin story, with some of its invisible sub-stories. So grab a coffee, and let's start on how I created the most elegant MLOps tool.
@@ -19,7 +19,7 @@ The experience is necessary to mention, as it educated me on the importance of U
 
 ### The beginning of my machine learning role
 
-One summer, I managed to get an internship at Otovo, one of Europe's biggest solar companies. They needed a way to detect solar panels that did not work as expected and wanted to see how we could use machine learning for the problem. I ended up working as the machine learning engineer in our cross-functional team, as I managed the data, developed the backend, and helped with which models to use. Therefore, I converted the data scientists' work into code used in production, where problems started to arise.
+One summer, I managed to get an internship at [Otovo](https://www.otovo.com), one of Europe's biggest solar companies. They needed a way to detect solar panels that did not work as expected and wanted to see how we could use machine learning for the problem. I ended up working as the machine learning engineer in our cross-functional team, as I managed the data, developed the backend, and helped with which models to use. Therefore, I converted the data scientists' work into code used in production, where problems started to arise.
 
 #### Data collection
 First of all, data collection could have been faster. The data scientist needed to ask me for either new data or a new feature to analyze. It led to slow development, as they needed to wait for my crafting the SQL queries, finding the correct tables, setting the proper constraints, combining multiple sources, and then creating the dataset in whatever file format made sense. However, it also led to me using time on what felt like low-value work, as given the correct tools, the data scientist would be able to do it themself.
