@@ -399,6 +399,9 @@ print(data.train.input, data.train.output)
 
 But the same information can be used to set up data catalogs, monitoring systems, evaluation systems, and more. This is currently not implemented fully, but I have tested the theory by adding a model register to the model. Therefore making it possible to spin up pre-processing-, inference-, data catalogs- servers by providing a repository definition.
 
+![Example of the Titanic dataset shown in Aligned UI](/assets/images/aligned-ui.png)
+The image above shows an example of Aligned UI, which describes all models, features, their dependencies and data sources. It is also possible to generate a description of the data distribution if wanted.
+
 ## The future
 The library [Aligned](https://github.com/otovo/aligned) has proved its usefulness in Otovo. And I get inspired by tools like Ludwig, which tries to make end-to-end deep learning declarative, and KServe, which makes k8s management easier for ML use cases. Therefore, Aligned has just begun with what it can do. 
 My mind is full of ideas for improving this library even more. However, thankfully we can stand on the shoulders of giants, as Aligned plans to not implement its own methods but instead rely on existing products. So what are some features to be planned in the near months?
