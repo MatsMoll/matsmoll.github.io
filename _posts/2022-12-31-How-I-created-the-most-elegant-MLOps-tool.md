@@ -419,30 +419,4 @@ Even though there are more things on my mind, lastly, I would like to mention ho
 The Aligned library has innovated a new way to describe ML products. It defines a single source of truth for logic while keeping the technology stack flexible. Such innovation has been possible by removing the need to depend on a processing engine, leading to less- and more transparent- code. Furthermore, the declarative API has made it possible to comment, add data validation, and define feature transformation at the same location. Moreover, it leads to a precise definition of the intended result. Finally, the library allows it to fulfill multiple use cases such as stream- and batch-processing and set up data catalogs, monitoring systems, and complete inference servers. All because we define weak logical dependencies while leaving the details for later.
 
 ## Follow the development
-So if you are interested in what aligned is trying to do, give it a star on [GitHub](https://github.com/otovo/aligned). And if you want to test it out briefly, all you need is to run the following code, and you have access to titanic features and the classical breast cancer dataset. But first run `pip install aligned`.
-
-```python
-from aladdin import FeatureStore, FileSource
-
-os.environ['REDIS_URL'] = "redis://localhost:6379"
-
-# The online store, which use the online source
-online_store = await FileSource.from_path("https://raw.githubusercontent.com/otovo/aladdin-example/main/feature-store.json").feature_store()
-
-# Write to the online store which stores the values in Redis
-await online_store.feature_view("breast_scans_transformed")\
-    .write({
-        'scan_id': [1, 2],
-        'area_mean': [1005, 1002],
-        'compactness_mean': [0.23, 0.10],
-        'perimeter_mean': [78, 90],
-        'radius_mean': [20, 18],
-        'smoothness_mean': [0.10, 0.2]
-    })
-    
-# Read the values from Redis
-processed_data = await online_store.features_for(
-    { "scan_id": [1, 2] }, 
-    features=["breast_scans_transformed:*"]
-).to_df()
-```
+So if you are interested in what aligned is trying to do, give it a star on [GitHub](https://github.com/otovo/aligned).
