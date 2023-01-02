@@ -13,6 +13,9 @@
             <a href="#!" class="category">{{c}}</a>
             {% endfor %}
           </div>
+          {% if page.image_url %}
+          <img src="{{page.image_url}}" alt="{{page.title}}"/>
+          {% endif %}
         </div>
         <div class="content">{{content}}</div>
       </section>

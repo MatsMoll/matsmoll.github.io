@@ -3,6 +3,7 @@ layout: post
 title: "How I created the most elegant MLOps tool"
 permalink: /2022/12/31/How-I-created-the-most-elegant-MLOps-tool.html
 categories: [Aligned, MLOps]
+image_url: /assets/images/jungle-image.png
 ---
 
 I wanted to write about this topic for a while but struggled to frame it correctly.  And finally, I landed on just telling the origin story, with some of its invisible sub-stories. So grab a coffee, and let's start on how I created the most elegant MLOps tool.

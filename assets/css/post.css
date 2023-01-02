@@ -53,6 +53,9 @@ main {
 .article-header {
   margin-bottom: 4rem;
 }
+.article-header img {
+  margin-top: 2rem;
+}
 .article-title {
   font-size: 2.4rem;
   margin-bottom: 0.6rem;
@@ -175,7 +178,7 @@ main {
 
 .content pre {
   background: var(--gray-3) !important;
-  padding: 1rem 1.5rem;
+  padding: 0.5rem 1rem;
   margin-bottom: 1.75rem;
 }
 
@@ -184,6 +187,10 @@ main {
   color: var(--white-2);
   white-space: pre;
   background-color: var(--gray-3);
+}
+.content p code {
+  padding: 3px 5px;
+  border-radius: 4px;
 }
 
 /* lbox */
