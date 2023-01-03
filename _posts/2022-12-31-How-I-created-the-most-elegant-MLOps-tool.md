@@ -418,5 +418,4 @@ Even though there are more things on my mind, lastly, I would like to mention ho
 ## Conclusion
 The Aligned library has innovated a new way to describe ML products. It defines a single source of truth for logic while keeping the technology stack flexible. Such innovation has been possible by removing the need to depend on a processing engine, leading to less- and more transparent- code. Furthermore, the declarative API has made it possible to comment, add data validation, and define feature transformation at the same location. Moreover, it leads to a precise definition of the intended result. Finally, the library allows it to fulfill multiple use cases such as stream- and batch-processing and set up data catalogs, monitoring systems, and complete inference servers. All because we define weak logical dependencies while leaving the details for later.
 
-## Follow the development
 So if you are interested in what aligned is trying to do, give it a star on [GitHub](https://github.com/otovo/aligned).
