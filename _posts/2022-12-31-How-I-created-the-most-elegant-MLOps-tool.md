@@ -255,6 +255,11 @@ class TitanicPassenger(FeatureView):
     age = Float().fill_na(0).description("A float as some have decimals")
 
     has_siblings = (sibsp != 0).description("Can not be negative, so if not 0 means they have a sibling")
+    
+    is_male, is_female = sex.one_hot_encode(['male', 'female'])
+    ordinal_sex = sex.ordinal_categories(
+        ["male", "female"]
+    ).description("Do not make that much sense, but is possible")
 ```
 
 Just see how elegant it is to have the description added. Kind of like a comment, but this can be used in other applications, like searching for features in something like a UI application. But notice, the `has_siblings` mention that the `sibsp` feature can not be under 0, but we use a 32 int data type. Such a constraint would be nice to validate.
@@ -287,10 +292,10 @@ class TitanicPassenger(FeatureView):
             .upper_bound(150)
     )
 
-    has_siblings = (sibsp != 0).description("Can not be negative, so if not 0 means they have a sibling")
+    has_siblings = (sibsp != 0).is_required().description("Can not be negative, so if not 0 means they have a sibling")
 ```
  
-Again, having all this information close to each other makes the data behavior much clearer. Adding both lower and upper is required, and accepted values validation makes it much easier to test my data hypothesis faster. But where is the data located? Defining data locations is where data sources come into play.
+Again, having all this information close to each other makes the data behavior much clearer. Adding both `lower_bound(...)`, `upper_bound(...)`, `is_required()`, and `accepted_values(...)` validation makes it much easier to test my data hypothesis faster. But where is the data located? Defining data locations is where data sources come into play.
 
 ### Data sources
 We often create a model based on historical data sources, so let's define some data. But first, we can start with how to define a local CSV file and add that to the view.
@@ -346,13 +351,13 @@ Unlike Bender, this time, handling model training was not of priority. This prio
 titanic_model = Model(
     features=[
         TitanicPassenger.select(lambda view: [
-            view.scaled_age,
+            view.age,
             view.is_male,
             view.is_mr,
             view.has_siblings,
         ])
     ],
-    targets=TitanicPassenger().survived
+    target=TitanicPassenger().survived
 )
 ```
 
