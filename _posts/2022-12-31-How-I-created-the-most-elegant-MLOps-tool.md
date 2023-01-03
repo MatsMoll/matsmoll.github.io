@@ -391,13 +391,11 @@ titanic_model = Model(
 We can then load the data with the following code.
 
 ```python
+store = ... # Load the store
+
 entities = {"passenger_id": [...]}
-store = await FileSource.json_at(
-    "feature-store.json"
-).feature_store()
-data = store.model(
-    "titanic_model"
-).features_for(entities)
+
+data = store.model("titanic_model").features_for(entities)
 
 pandas_df = await data.to_pandas()
 ```
