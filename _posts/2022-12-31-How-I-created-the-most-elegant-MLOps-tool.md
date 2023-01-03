@@ -344,6 +344,33 @@ class TitanicPassenger(FeatureView):
  
 An HTTP push with the `HttpStreamSource` may make more sense for those without streaming architecture. The HTTP push is not a very resilient method, as data can easily get lost, but it is an easy way of testing and requires little to no architecture.
 
+### Combining Sources
+The presented API and features enable expressive and clean code bases. However, we still needed to make it possible to combine multiple different sources. Something we could not do using Feast. This need is why there is the concept of `CombinedFeatureView`.
+
+```python
+class FinanceFeatures(FeatureView):
+
+    metadata = ...
+    
+    passenger_id = Entity(dtype=Int32())
+    income = Float()
+    
+class CombinedTitanicView(CombinedFeatureView):
+    
+    metadata = CombinedFeatureViewMetadata(
+        name="combined_titanic"
+    )
+    
+    titanic = TitanicPassenger()
+    finance = FinanceFeatures()
+    
+    age_income_ratio = (
+        finance.income / titanic.age
+    ).description("Not the best feature, but what a power to have")
+```
+
+Combining multiple feature views from different sources has been extremely useful. Therefore, making it easier to work with data lakes or test experimental features that do not exist in the data warehouse yet. However, how can we use all this in a model?
+
 ### Models
 Unlike Bender, this time, handling model training was not of priority. This priority was because I wanted better control of the foundational data. However, there was still interest in adding support for model use cases like a model. 
 
@@ -361,7 +388,23 @@ titanic_model = Model(
 )
 ```
 
+We can then load the data with the following code.
+
+```python
+entities = {"passenger_id": [...]}
+store = await FileSource.json_at(
+    "feature-store.json"
+).feature_store()
+data = store.model(
+    "titanic_model"
+).features_for(entities)
+
+pandas_df = await data.to_pandas()
+```
+
 The shown case could be better, as only one feature view is used for a model, but you can combine multiple views. Such a view will define a model's input and know how to combine all the needed features efficiently. Such views can also simplify data set creation and enables a wide range of exciting features. However, you may need clarification on the `.select(lambda view: [...])` syntax? The reasoning is that this provides proper code completion and makes the whole system safer to use.
+
+
 
 ### Repository definition
 The end goal of this system was to have a single source of truth that requires storing this information in some way. That is why all this information gets compiled into a schema stored in some defined location. This could be locally in a file, in a database, or even in an S3 bucket. Therefore making the information accessible by whoever needs it and fulfilling the single source of truth requirement as our batch, inference, and evaluation services can get the same features.
