@@ -8,7 +8,7 @@ image_url: /assets/images/vally.png
 
 Navigating the landscape of MLOps can be an overwhelming task. There are thousands of tools to explore, and understanding which problem each tool tackles can take time to grasp.
 
-However, the core concept of an ML model is simple. For some input, produce an output. Or, as math would describe it, $f(X) \rightarrow y$. So how could this simple function lead to the chaotic landscape that exists?
+However, the core concept of an ML model is simple. For some input, produce an output. Or, as math would describe it, $$f(X) \rightarrow y$$. So how could this simple function lead to the chaotic landscape that exists?
 
 We will look at some common components for AI models deployed behind an API to keep this post reasonably sized.
 
@@ -95,7 +95,7 @@ A feature store is a highly specialized database for machine learning applicatio
 One such use case will be how to generate data sets that would be valid at the time of prediction. 
 Therefore, fulfilling the same needs as described as a data warehouse. However, the feature store abstracts away the complex queries and logic needed to provide such data. Also known as a *Point-in-time correct join*. 
 
-Therefore, creating a dataset where each row has the features that were available at their prediction time $$D = \{X_{0}^{0}, X_{1}^{0}, ..., X_{t}^{e} \}$$ where $$t$$ is the prediction time, and $$e$$ is the entity to predict for.
+Therefore, creating a dataset where each row has the features that were available at their prediction time $$D = \{X_{0,0}, X_{1,0}, ..., X_{t,e} \}$$ where $$t$$ is the prediction time, and $$e$$ is the entity to predict for.
 
 Furthermore, we often want to engineer our features a bit, either by generating embedding features or something simpler as computing a ratio between two columns.
 
