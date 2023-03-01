@@ -157,7 +157,4 @@ Lastly, managing our output data can quickly become an afterthought. Especially 
 Furthermore, the need for tooling to manage our model outputs can point to MLOps being immature.
 
 
-However, many exciting MLOps solutions are trying to evolve the field further. One such tool is [Aligned](https://github.com/otovo/aligned), removing the separation between $$X$$ and $$y$$, and unifying it more as a data category. So follow me and the [Aligned](https://github.com/otovo/aligned) repo for some upcoming announcements!
-
-Lastly, managing our output data can quickly become an afterthought. Especially for companies that need more experience with ML products. As we quickly focus on the tooling making ML possible in the first place. 
-Furthermore, the need for tooling to manage our model outputs can point to MLOps being immature.
+However, many exciting MLOps solutions are trying to evolve the field further. One such tool is [Aligned](https://github.com/otovo/aligned), removing the separation between $$X$$ and $$y$$, and unifying it more as a data category. So follow me and the [Aligned](https://github.com/otovo/aligned) repo for some exciting upcoming announcements!
