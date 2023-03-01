@@ -20,42 +20,42 @@ Let's start with the most popular category - the model.
 Solving a problem from this category can be seen as a model-centric approach. Therefore, making it one of the most popular approaches as well. As we need a model to have an ML product.
 
 #### Model creation
-Before we can do anything, we need a model to use. Thankfully, tools such as `sklearn`, `TensorFlow`, `PyTorch`, etc., have made it possible to train a model with a few lines of code - `model.fit(X, y)`. 
+Before we can do anything, we need a model to use. Thankfully, tools such as [sklearn](https://scikit-learn.org/stable/index.html), [TensorFlow](https://www.tensorflow.org), [PyTorch](https://pytorch.org), etc., have made it possible to train a model with a few lines of code - `model.fit(X, y)`. 
 
 This problem statement is what we see when being introduced to ML for the first time, and rightfully so.
 
-However, this is only the start of even more questions. A natural next question would be - How can we release a model, making it accessible to others?
+However, this is only the start of even more questions. One natural question would be - How can we release a model, making it accessible to others?
 
 #### Inference server
-Meet one approach, an inference server. This approach often requires a separate server that only handles model inference. Therefore, making it possible to access additional hardware like GPUs or TPUs if needed. As a result, an inference server is a standard solution.
+Meet one approach, an inference server. This approach often requires a separate server that handles model inference. Therefore, making it possible to access additional hardware like GPUs or TPUs if needed. As a result, an inference server is a standard solution.
 
-However, typing up a new codebase only to make one model accessible can sound like a lot of work. Since an inference server is a common requirement, many solid solutions have popped up. For example, `Huggingface` offers a way to deploy transformer models within a few minutes, while `OpenAI` offers pre-trained models through an API. Then you have solutions like `KServe`, which makes it reasonably easy to deploy custom AI models with higher customizability.
+However, typing up a new codebase only to make one model accessible can sound like a lot of work. Since an inference server is a common requirement, many solid solutions have popped up. For example, [Huggingface](https://huggingface.co/inference-endpoints) offers a way to deploy transformer models within a few minutes, while [OpenAI](https://openai.com) offers pre-trained models through an API. Then you have solutions like [KServe](https://kserve.github.io/website/0.10/), which makes it reasonably easy to deploy custom AI models on a [Kubernetes](https://kubernetes.io) cluster
 
 But with our model deployed comes a new problem - What if I want to update my model to a new version?
 
 #### Model Registry
 Here is where the model registry comes in handy. In the same way we version code, will there be a need to version models at some point. Either because we found a new feature that could help or because the old pattern does not apply anymore - known as concept drift.
 
-Therefore, we need to have some way of managing $$f_0(X), f_1(X)$$, and so on.
+Therefore, we need to have some way of managing $$f_0(X), f_1(X), ..., f_n(X)$$, and so on.
 
-One simple way could be to store our models in a storage service like `AWS S3`. Such a solution can work if we have a few artifacts to handle. Therefore, an AI model with low complexity.
+One simple way could be to store our models in a storage service like [AWS S3](https://aws.amazon.com). Such a solution can work if we have a few artifacts to handle. 
 However, the complexity can quickly increase as we want the model to do more. For example, we could add pre-processing and post-processing, or we want to manage the runtime environment of the model. 
-Using a more specialized model registry component for such a requirement would make sense. One such tool would be `MLFlow`.
+Using a more specialized model registry component for such a requirement would make sense. One such tool would be [MLFlow](https://www.mlflow.org).
 
-But again, with multiple model versions, it can take time to understand what differentiates each model. Knowing the difference between all our models would be nice.
+But again, as we start to train new models regularly, new problems arise. For example, how will we know the differences between all our models?
 
 #### Model Card
 Here is where model cards come in. It summarizes what the model will do, how it was created, its limitations, some performance statistics, and more. Therefore, a model card summarizes $$f_n(X)$$.
 
-One tool that collects this information is `model_card_toolkit`. However, we will need to dive deeper into our model. So could we see how our model came to be?
+One tool that collects this information is [model_card_toolkit](https://github.com/tensorflow/model-card-toolkit). However, we will need to dive deeper into our model. So could we see how our model came to be?
 
 #### Experiment tracking
 Experiment tracking is one solution to such a problem. Providing a log of metrics as our model is trained, in addition, can all kinds of evaluation graphs be logged - as confusion matrices, and log which features contribute the most to our output. Therefore, answering how we arrived at $$f_n(X)$$.
 
-Some tools that answer this question are `Weights & Biases`, `ClearML`, and `MLFlow`.
+Some tools that answer this question are [Weights & Biases](https://wandb.ai), [ClearML](https://clear.ml), and [MLFlow](https://www.mlflow.org).
 
 #### Summary
-The model category starts tackling problems from the model's point of view. Answering a lot of the questions, such as how was $$f(X)$$ created, when to use $$f(X)$$, how to version $$f(X)$$, and how we can expose $$f(X)$$ to others.
+The model category starts tackling problems from the model's point of view. Answering a lot of the questions, such as how $$f(X)$$ got created, when to use $$f(X)$$, how to version $$f(X)$$, and how we can expose $$f(X)$$ to others.
 
 However, we still have some huge questions to answer before we have a fully working ML system. Because, what is $X$, and can $X$ change how well our model performs?
 Such questions lead us to the next category.
@@ -64,7 +64,7 @@ Such questions lead us to the next category.
 Introducing our second category - input data. 
 
 Someone jokingly said that ML practitioners use 99% of their time debugging and 1% writing code. However, there is some truth to this. 
-It can be hard to debug ML products because silent bugs can quickly happen. 
+It can be hard to debug ML products, and silent bugs can be one reason. 
 
 #### An example of a silent bug
 To bring home this point, let's look at a simple example.
@@ -75,23 +75,24 @@ However, we notice that our model performs way worse in production. How could th
 We start debugging our data and notice that we estimate the distance when the ride starts but update our database with the actual duration when the ride has ended. 
 Therefore, we have trained on the actual distance, but we predict an estimate. Thus, our model performance is worse in production.
 
-Overwriting an estimate with the actual value may seem like a poor choice. Still, overwriting old data - known as slowly changing dimension 1 is common practice because it simplifies the queries in an application database. However, this makes it easier to make mistakes if we mutate data, as we may train a model on data from the future.
+Overwriting an estimate with the actual value may seem like a poor choice. Still, overwriting old data - known as slowly changing dimension 1 is common practice because it simplifies the queries in an application database. However, this makes making mistakes in ML products easier if we mutate data, as we may train a model on data from the future.
 
 #### Data warehouse
 One solution and a common component in business analytics is a data warehouse.
-A data warehouse is a single truth source for all analytical workloads. Making it optimal to compute aggregates on millions of records.
+A data warehouse is a single truth source for all analytical workloads. Making it optimal to compute aggregates on millions of records, and ML products can leverage this component.
 
-Furthermore, since some data warehouses store a historical record of our data - using slowly changing dimension 2, will it be possible to travel back in time. Therefore, it is possible to ask the question - what is $$X_{t}$$ when $$t =$$ the prediction time?
+Furthermore, since some data warehouses store a historical record of our data - potentially using slowly changing dimension 2, will it be possible to travel back in time. Therefore, it is possible to ask the question - what is $$X_{t}$$ when $$t =$$ the prediction time?
 
 As an ML practitioners, this means we can create higher-quality datasets.
-Let's use the ride-sharing example again. We may store our estimated distance value and the overwritten actual distance. But by correctly crafting our queries, may we train on the estimated value. Which is the same environment as we predict in. Therefore, the new training set increases the performance of our model in production, leading to a more significant value gain for our end-users.
+Let's use the ride-sharing example again. We may store our estimated distance value and the overwritten actual distance in a data warehouse but with a different timestamp. 
+By correctly crafting our queries, we can select the values available at prediction time, training on the estimated value, which is the same data we predict on. Therefore, the new training set increases the performance of our model in production, leading to a more significant value gain for our end-users.
 
 However, crafting such queries can be complex, and it is easy to make mistakes. Therefore, an ML researcher would like to think about something other than this - so what can we do about this?
 
 #### Feature store
 Here is where our feature store starts providing value.
 
-A feature store is a highly specialized database for machine learning applications.
+A feature store acts as a highly specialized database for machine learning applications.
 One such use case will be how to generate data sets that would be valid at the time of prediction. 
 Therefore, fulfilling the same needs as described as a data warehouse. However, the feature store abstracts away the complex queries and logic needed to provide such data. Also known as a *Point-in-time correct join*. 
 
@@ -110,7 +111,7 @@ However, this often leads to slower reads when we ask for individual rows of dat
 
 As a result, a feature store fixes this limitation by changing the data storage based on the query type. Therefore, using a data warehouse for generating large datasets, but then using a key-value store for low latency inference data.
 
-Some alternatives for feature stores are `Feast`, `Tecton`, `Hopsworks`, or my own solution `Aligned`.
+Some alternatives for feature stores are [Feast](https://feast.dev), [Tecton](https://www.tecton.ai), [Hopsworks](https://www.hopsworks.ai), or my own solution [Aligned](https://github.com/otovo/aligned).
 
 #### Summary
 Ensuring data quality can be hard, as logical errors can easily creep in. Thankfully, a feature store can be a very useful component. Therefore, leveraging well-established data engineering practices abstracts away a lot of the complexity needed for ML products.
@@ -129,9 +130,9 @@ Secondly, the output is the most critical artifact of them all, as this is what 
 However, more tooling is needed to make it easy to validate our online predictions. 
 
 #### Monitoring
-From my experience have, the most popular solution been to set up a `Prometheus` and `Grafana` server for such use cases.
+From my experience have, the most popular solution been to set up a [Prometheus](https://prometheus.io) and [Grafana](https://grafana.com) server for such use cases.
 
-The Prometheus stack can work for simple needs. In the same way, `S3` works well as a model registry when the artifact complexity is low.
+The Prometheus stack can work for simple needs. In the same way, S3 works well as a model registry when the artifact complexity is low.
 
 However, ML-specific use cases can be hard to fulfill with such a stack. One such use case could be to view performance metrics based on sub-groups. This is very doable if we know the sub-group in advance, but it can lead to a low feedback loop if we want to check new sub-groups.
 
@@ -141,7 +142,7 @@ Therefore, using a ground truth to evaluate our predictions $$y = \hat y$$.
 
 An evaluation store also enables viewing performance in sub-groups of interest, leading to a better understanding of our model's limitations.
 
-One tool here is `Gantry`, but other players are also starting to pop up.
+One tool here is [Gantry](https://gantry.io), but other players are also starting to pop up.
 
 ## Conclusion
 The amount of existing MLOps solutions is enormous, and this post only touches the tip of the iceberg. Concepts like drift detection and improving label data with active learning, to name a few.
@@ -151,6 +152,12 @@ Furthermore, managing our models has become extremely easy, as noted by Chip Huy
 > ..., with models being increasingly commoditized, model development is often the easier part.
 
 However, managing our input data takes a lot of work, as it is easy to create faulty datasets. Furthermore, finding these data faults is hard. Thankfully, we have designed tools such as a feature store to reduce the number of potential flaws.
+
+Lastly, managing our output data can quickly become an afterthought. Especially for companies that need more experience with ML products. As we quickly focus on the tooling making ML possible in the first place. 
+Furthermore, the need for tooling to manage our model outputs can point to MLOps being immature.
+
+
+However, many exciting MLOps solutions are trying to evolve the field further. One such tool is [Aligned](https://github.com/otovo/aligned), removing the separation between $$X$$ and $$y$$, and unifying it more as a data category. So follow me and the [Aligned](https://github.com/otovo/aligned) repo for some upcoming announcements!
 
 Lastly, managing our output data can quickly become an afterthought. Especially for companies that need more experience with ML products. As we quickly focus on the tooling making ML possible in the first place. 
 Furthermore, the need for tooling to manage our model outputs can point to MLOps being immature.
