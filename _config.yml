@@ -12,6 +12,7 @@ author:
   - title: email
     url: mailto:mats@mollestad
 highlighter: rouge
+markdown: kramdown
 plugins:
   - jemoji
   - jekyll-seo-tag
