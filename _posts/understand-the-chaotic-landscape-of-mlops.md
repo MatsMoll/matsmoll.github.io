@@ -2,6 +2,7 @@
 layout: post
 title: "Understanding the chaotic landscape of MLOps"
 categories: [MLOps, Components]
+permalink: /posts/understanding-the-chaotic-landscape-of-mlops
 image_url: /assets/images/vally.png
 ---
 
