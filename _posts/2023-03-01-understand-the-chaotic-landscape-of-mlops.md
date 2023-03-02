@@ -54,10 +54,12 @@ Experiment tracking is one solution to such a problem. Providing a log of metric
 
 Some tools that answer this question are [Weights & Biases](https://wandb.ai), [ClearML](https://clear.ml), and [MLFlow](https://www.mlflow.org).
 
-#### Summary
+#### Final thoughts on $$f(x)$$
 The model category starts tackling problems from the model's point of view. Answering a lot of the questions, such as how $$f(X)$$ got created, when to use $$f(X)$$, how to version $$f(X)$$, and how we can expose $$f(X)$$ to others.
 
-However, we still have some huge questions to answer before we have a fully working ML system. Because, what is $X$, and can $X$ change how well our model performs?
+![An overview of some model-centric tools.](/assets/images/mlops/model.png)
+
+However, we still have some huge questions to answer before we have a fully working ML system. Because, what is $$X$$, and can $$X$$ change how well our model performs?
 Such questions lead us to the next category.
 
 ### Input data - $$X$$
@@ -73,7 +75,7 @@ Therefore, thinking this can be a good feature. And the performance metrics were
 However, we notice that our model performs way worse in production. How could this be?
 
 We start debugging our data and notice that we estimate the distance when the ride starts but update our database with the actual duration when the ride has ended. 
-Therefore, we have trained on the actual distance, but we predict an estimate. Thus, our model performance is worse in production.
+Therefore, we have trained on the actual distance, but we predict an estimate. Thus, our model performance is worse in production. Such a bug is also known as data leakage.
 
 Overwriting an estimate with the actual value may seem like a poor choice. Still, overwriting old data - known as slowly changing dimension 1 is common practice because it simplifies the queries in an application database. However, this makes making mistakes in ML products easier if we mutate data, as we may train a model on data from the future.
 
@@ -113,8 +115,10 @@ As a result, a feature store fixes this limitation by changing the data storage 
 
 Some alternatives for feature stores are [Feast](https://feast.dev), [Tecton](https://www.tecton.ai), [Hopsworks](https://www.hopsworks.ai), or my own solution [Aligned](https://github.com/otovo/aligned).
 
-#### Summary
+#### Final thoughts on $$X$$
 Ensuring data quality can be hard, as logical errors can easily creep in. Thankfully, a feature store can be a very useful component. Therefore, leveraging well-established data engineering practices abstracts away a lot of the complexity needed for ML products.
+
+![An overview of some data input tools.](/assets/images/mlops/input.png)
 
 But still, there is one category left.
 
@@ -137,14 +141,35 @@ The Prometheus stack can work for simple needs. In the same way, S3 works well a
 However, ML-specific use cases can be hard to fulfill with such a stack. One such use case could be to view performance metrics based on sub-groups. This is very doable if we know the sub-group in advance, but it can lead to a low feedback loop if we want to check new sub-groups.
 
 #### Evaluation store
-Finally, we have the evaluation store component. A component that specializes in monitoring performance for ML products. 
-Therefore, using a ground truth to evaluate our predictions $$y = \hat y$$.
+Here we have the evaluation store component. A component that specializes in monitoring online performance for ML products. 
+However, this can sometimes be down prioritised to setup, because we may think training evaluation is good enough. But this will not always be the case, because of data drift, and silent data bugs.
+Therefore, using an evaluation store uses ground truth to evaluate our online predictions $$y = \hat y$$.
 
 An evaluation store also enables viewing performance in sub-groups of interest, leading to a better understanding of our model's limitations.
 
 One tool here is [Gantry](https://gantry.io), but other players are also starting to pop up.
 
-## Conclusion
+However, we have still on question left - why did the model return such an output?
+
+#### Explanations
+Finally, the last component we will cover, explainers.
+Knowing why a model return an output can be very important for businesses. So important that businesses sometimes will release a less performant model that is explainable, rather than a more performant blackbox model.
+Therefore, an explainer answers why $$\hat y$$.
+
+Here can a lot of approaches be used. Such as analysing the inner workings of a model - checking a decision-tree's splits, but this will not work for complex models as neural nets. 
+Such models are black boxes, resulting in a need for different tooling.
+Thankfully, examples of useful tooling can be [alibi explain](https://github.com/SeldonIO/alibi), [SHAP](https://shap.readthedocs.io/en/latest/), and [LIME](https://github.com/marcotcr/lime).
+
+#### Final thoughts on $$y$$
+The road to a fully functional ML product is long and complicated. However, online prediction evaluation can be an afterthought for ML products, even though online predictions are their most important artifact.
+Therefore, potentially leading to solutions with more boilerplate code.
+
+![An overview of some data output tools.](/assets/images/mlops/output.png)
+
+However, solutions like an evaluation store can help with this. 
+Furthermore, tooling that explains our output can be crucial to provide the confidence and trust our ML products needs.
+
+## Wrap up
 The amount of existing MLOps solutions is enormous, and this post only touches the tip of the iceberg. Concepts like drift detection and improving label data with active learning, to name a few.
 However, we can broadly categorize MLOps solutions into three groups. Managing the input $$X$$, the model $$f(X)$$, or the output $$y$$. 
 
@@ -156,5 +181,6 @@ However, managing our input data takes a lot of work, as it is easy to create fa
 Lastly, managing our output data can quickly become an afterthought. Especially for companies that need more experience with ML products. As we quickly focus on the tooling making ML possible in the first place. 
 Furthermore, the need for tooling to manage our model outputs can point to MLOps being immature.
 
-
 However, many exciting MLOps solutions are trying to evolve the field further. One such tool is [Aligned](https://github.com/otovo/aligned), removing the separation between $$X$$ and $$y$$, and unifying it more as a data category. So follow me and the [Aligned](https://github.com/otovo/aligned) repo for some exciting upcoming announcements!
+
+![An overview of the MLOps tooling landscape.](/assets/images/mlops/final.png)
