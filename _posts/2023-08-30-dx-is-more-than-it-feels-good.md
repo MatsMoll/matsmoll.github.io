@@ -18,7 +18,7 @@ And I would answer - no, it is not; it is much more flexible, so let me show you
 ## Example 1: Pydantic vs dataclasses
 Let's evaluate two codebases that fulfill the same need but use different implementations. Furthermore, we will determine why one solution is better using UX principles rather than the unclear "feel better."
 
-The following code makes it possible to encode and load a JSON object. Our first implementation will use `dataclasses,` and the second will use `pydantic`.
+The following code makes it possible to encode and load a JSON object. Our first implementation will use `dataclasses`, and the second will use `pydantic`.
 Now, `dataclasses`'s use-case is not to make JSON easier to work with. However, `dataclasses` can implement our "happy path," so it could have been used for such a use-case.
 
 So, let's look at the `dataclasses` implementation.
