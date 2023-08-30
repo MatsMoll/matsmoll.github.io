@@ -5,8 +5,6 @@ categories: [DX, Software Design]
 permalink: /posts/dx-is-more-than-it-feels-good
 ---
 
-# DX is more than 'It Feels Good'
-
 Many developers often lean towards tools that "feel good" and argue they have good Developer Experience (DX). However, this subjective measure of "feel good" is rooted in past experiences and familiarity with similar tools, making the argument of "good DX" worthless. Furthermore, relying solely on what feels comfortable can hinder innovation and limit our perspective. Instead, a more objective way of measuring DX and evaluating code quality will be needed if we continue using the term DX.
 
 Therefore, using more tried-and-tested principles can benefit this debate. However, I am not proposing to use principles like SOLID, DRY, or Clean Code; I'm instead proposing to use existing UX principles and apply them across different programming languages, frameworks, and paradigms.
@@ -109,7 +107,7 @@ This is what I dislike about TypeScript, as we quickly get a false perception ab
 This is where the original UX heuristic may differ from "my" DX one. We sometimes need the technical jargon and details to fix the problem. However, the heuristic is still valuable, as precise error messages with guidance are super valuable.
 
 Again, our `dataclasses` solution can fail if we call `area(size),` which can lead to the following error message:
-`TypeError: can't multiply sequence by non-int of type 'str". This tells us precisely what the problem is. However, we are told we can't do what we want, which is multiplying. Furthermore, the compounding effect of the mismatching system state makes it harder to understand why we can't multiply. The reason for this error is because of invalid input. 
+`TypeError: can't multiply sequence by non-int of type 'str"`. This tells us precisely what the problem is. However, we are told we can't do what we want, which is multiplying. Furthermore, the compounding effect of the mismatching system state makes it harder to understand why we can't multiply. The reason for this error is because of invalid input. 
 
 However, our `pydantic` solution provides an error when trying to create an object. But this leads to the following error.
 
