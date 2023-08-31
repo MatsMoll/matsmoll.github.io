@@ -58,7 +58,7 @@ Why? Because I do not like that we need to subclass from `BaseModel` in `pydanti
 
 However, would this be the correct choice, and if so, why?
 
-### Evaluate using DX
+### Evaluate using UX
 To evaluate our use case, I will mainly use [Nilsens Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/). These are very generic, but it is also what makes them so flexible. Furthermore, it is still better than "it feels good," so I think it is a step in the right direction.
 
 However, using other UX principles like the [Proximity principle](https://www.nngroup.com/articles/gestalt-proximity/) - related information should be close to each other, which could be used to argue against C header files. Other concepts, e.g., from "the design of everyday things," would also work.
@@ -72,7 +72,7 @@ While the `dataclasses` and `pydantic` solutions appear similar, their approache
 
 Our `dataclasses` solution allows the following invalid input.
 
-```
+```python
 size = Size(width="10m", height="20cm")
 ```
 Here, we send in a string while we expect an integer to be passed, and we can use this and send it into functions using the `Size` object.
@@ -173,7 +173,7 @@ This is a common codebase for data applications. However, this solution has simi
 We cannot validate our SQL code because it is written in a pure string. We do not make our code check against bad data, as we do not have data validation. This is intentionally not added, as presenting too much code in a blog post is uninteresting. Furthermore, experimental code can quickly skip data validation, as extra dependencies are needed, leading to odd errors.
 Therefore, making our `df["picked_up_at"].dt.day` potentially error-prone, as we forcefully cast our value to a date time type without converting the `picked_up_at` to a proper value.
 
-Furthermore, we can not use our Python LSP to catch naming errors in our data frame, as we use strings to reference values. Leading to the potential error `KeyError: 'day_of_weak'` on runtime rather than an error on compile time. Similar to how we can not type check for values in dictionaries, but we can if described as a `class` object.
+Furthermore, we can not use our Python [Language Server Protocol (LSP)](https://en.wikipedia.org/wiki/Language_Server_Protocol) to catch naming errors in our data frame, as we use strings to reference values. Leading to the potential error `KeyError: 'day_of_weak'` on runtime rather than an error on compile time. Similar to how we can not type check for values in dictionaries, but we can if described as a `class` object.
 
 Therefore, we have little to no system status visibility, leading to less error prevention, and we do not help our users recognize, diagnose, and recover from errors.
 
@@ -304,7 +304,10 @@ This is why `aligned` makes it possible to change the processing engine when nee
 
 In other words, high latency can ruin the developer experience, but only some will notice a more performant solution than an already good enough solution.
 
+### Delving Deeper into Heuristics
+While I've touched on several heuristics in this piece, there's a wealth more out there—like "Help and documentation", "User control and freedom", and "Match between system and the real world". I'd love to dive deeper, but we're already wading through quite a bit here. Perhaps in a future post!
+
 ## Conclusion
 Developer Experience (DX) has been somewhat diluted to represent tools developers find comfortable. Therefore, it often means "what I am used to." But to drive valuable discussions and innovation, there's a pressing need to view DX through a more objective and comprehensive lens. Incorporating UX principles to evaluate code can pave the way for a more inclusive and critical approach, helping developers describe their code in new ways and make more educated choices for why technologies are good or bad. Even when they look foreign and odd at first glance.
 
-If you found the read interesting, please share or give [`aligned`](https://github.com/MatsMoll/aligned) a star. Thanks for reading.
+If you found the read interesting, please share or give [Aligned](https://github.com/MatsMoll/aligned) a star. Thanks for reading.
