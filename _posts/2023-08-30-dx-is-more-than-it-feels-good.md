@@ -204,7 +204,7 @@ class Trips:
     long_diff = (pickup_longitude - dropoff_longitude) ** 2
     travel_distance = (lat_diff + long_diff) ** 0.5
         
-    day_of_week = picked_up_at.date_component("day").description("The day in the month")
+    day_of_week = picked_up_at.day.description("The day in the month")
     
     
 input = await (Trips.query()
