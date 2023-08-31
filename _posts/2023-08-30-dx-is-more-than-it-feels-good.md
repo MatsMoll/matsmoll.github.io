@@ -107,7 +107,11 @@ This is what I dislike about TypeScript, as we quickly get a false perception ab
 This is where the original UX heuristic may differ from "my" DX one. We sometimes need the technical jargon and details to fix the problem. However, the heuristic is still valuable, as precise error messages with guidance are super valuable.
 
 Again, our `dataclasses` solution can fail if we call `area(size),` which can lead to the following error message:
-`TypeError: can't multiply sequence by non-int of type 'str"`. This tells us precisely what the problem is. However, we are told we can't do what we want, which is multiplying. Furthermore, the compounding effect of the mismatching system state makes it harder to understand why we can't multiply. The reason for this error is because of invalid input. 
+
+```
+TypeError: can't multiply sequence by non-int of type "str"
+```
+This tells us precisely what the problem is. However, we are told we can't do what we want, which is multiplying. Furthermore, the compounding effect of the mismatching system state makes it harder to understand why we can't multiply. The reason for this error is because of invalid input. 
 
 However, our `pydantic` solution provides an error when trying to create an object. But this leads to the following error.
 
