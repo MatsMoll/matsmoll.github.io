@@ -170,10 +170,10 @@ duration = model.predict(input)
 ```
 
 This is a common codebase for data applications. However, this solution has similar problems to our `dataclasses` solution earlier. 
-We do not make our code check against bad data, as we do not have data validation. This is intentionally not added, as presenting too much code in a blog post is uninteresting. Furthermore, experimental code can quickly skip data validation, as extra dependencies are needed, leading to odd errors.
+We cannot validate our SQL code because it is written in a pure string. We do not make our code check against bad data, as we do not have data validation. This is intentionally not added, as presenting too much code in a blog post is uninteresting. Furthermore, experimental code can quickly skip data validation, as extra dependencies are needed, leading to odd errors.
 Therefore, making our `df["picked_up_at"].dt.day` potentially error-prone, as we forcefully cast our value to a date time type without converting the `picked_up_at` to a proper value.
 
-Furthermore, we can not use our Python LSP to catch naming errors in our data frame, as we use strings to reference values. Leading to the potential error `KeyError: 'day_of_weak" on runtime rather than an error on compile time. Similar to how we can not type check for values in dictionaries, but we can if described as a `class` object.
+Furthermore, we can not use our Python LSP to catch naming errors in our data frame, as we use strings to reference values. Leading to the potential error `KeyError: 'day_of_weak'` on runtime rather than an error on compile time. Similar to how we can not type check for values in dictionaries, but we can if described as a `class` object.
 
 Therefore, we have little to no system status visibility, leading to less error prevention, and we do not help our users recognize, diagnose, and recover from errors.
 
@@ -307,4 +307,4 @@ In other words, high latency can ruin the developer experience, but only some wi
 ## Conclusion
 Developer Experience (DX) has been somewhat diluted to represent tools developers find comfortable. Therefore, it often means "what I am used to." But to drive valuable discussions and innovation, there's a pressing need to view DX through a more objective and comprehensive lens. Incorporating UX principles to evaluate code can pave the way for a more inclusive and critical approach, helping developers describe their code in new ways and make more educated choices for why technologies are good or bad. Even when they look foreign and odd at first glance.
 
-If you found the read interesting, please share or give `aligned` a star. Thanks for reading.
+If you found the read interesting, please share or give [`aligned`](https://github.com/MatsMoll/aligned) a star. Thanks for reading.
