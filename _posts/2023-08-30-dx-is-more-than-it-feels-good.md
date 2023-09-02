@@ -1,13 +1,13 @@
 ---
 layout: post
 title: "DX is more than 'It Feels Good'"
-categories: [DX, Software Design]
+categories: [DX, UX, Software Design]
 permalink: /posts/dx-is-more-than-it-feels-good
 ---
 
 Many developers often lean towards tools that "feel good" and argue they have good Developer Experience (DX). However, this subjective measure of "feel good" is rooted in past experiences and familiarity with similar tools, making the argument of "good DX" worthless. Furthermore, relying solely on what feels comfortable can hinder innovation and limit our perspective. Instead, a more objective way of measuring DX and evaluating code quality will be needed if we continue using the term DX.
 
-Therefore, using more tried-and-tested principles can benefit this debate. However, I am not proposing to use principles like SOLID, DRY, or Clean Code; I'm instead proposing to use existing UX principles and apply them across different programming languages, frameworks, and paradigms.
+Therefore, using more tried-and-tested principles can benefit this debate. However, I am not proposing to use principles like [SOLID](https://en.wikipedia.org/wiki/SOLID), [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself), or [Clean Code](https://books.google.no/books/about/Clean_Code.html?id=hjEFCAAAQBAJ&source=kp_book_description&redir_esc=y); I'm instead proposing to use existing UX principles and apply them across different programming languages, frameworks, and paradigms.
 
 But UX is for UI design, I hear you say.
 
@@ -61,7 +61,7 @@ However, would this be the correct choice, and if so, why?
 ### Evaluate using UX
 To evaluate our use case, I will mainly use [Nilsens Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/). These are very generic, but it is also what makes them so flexible. Furthermore, it is still better than "it feels good," so I think it is a step in the right direction.
 
-However, using other UX principles like the [Proximity principle](https://www.nngroup.com/articles/gestalt-proximity/) - related information should be close to each other, which could be used to argue against C header files. Other concepts, e.g., from "the design of everyday things," would also work.
+However, using other UX principles like the [Proximity principle](https://www.nngroup.com/articles/gestalt-proximity/) - related information should be close to each other, which could be used to argue against C header files. Other concepts, e.g., from "[the design of everyday things](https://www.amazon.com/Design-Everyday-Things-Donald-Norman/dp/1452654123)" would also work.
 
 ### Error prevention
 > Good error messages are important, but the best designs carefully prevent problems from occurring in the first place.
@@ -187,7 +187,7 @@ taxi_db = PostgreSQLConfig(env_var="TAXI_DB_URL")
 @feature_view(
     name= "trips,"
     description= "Features related to the departure of a taxi ride,"
-    batch_source=taxi_db.table("trips")
+    batch_source=taxi_db.table("trips", mapping_keys={"id": "trip_id"})
 )
 class Trips:
     trip_id = UUID().as_entity()
@@ -252,7 +252,7 @@ Again, this is why using the proximity principle can also help with recognizing 
 > 
 > [NN Group](https://www.nngroup.com/articles/ten-usability-heuristics/)
 
-Following conventions and common standards is always good, making it easier to transition from different domains. One such standard could be the usage of SQL, using the standard operators as `+,` `-,` `*` etc., or using common names on data type as `Float,` `Int64`, and maybe not 'long long int.`
+Following conventions and common standards is always good, making it easier to transition from different domains. One such standard could be the usage of SQL, using the standard operators as `+`, `-`, `*` etc., or using common names on data type as `Float,` `Int64`, and maybe not 'long long int.`
 
 However, this is where `pandas` and `aligned` provide consistency and standards at different abstraction levels. As `pandas` provides data transformation consistency across different machine architectures, while `aligned` provides consistency at an application service level, transformations, and data dependencies can be shared in a serialized format. 
 
@@ -287,7 +287,7 @@ worker = StreamWorker.from_reference(
 ```
 Therefore, finding tools specializing in your needs will make you move faster. However, making it possible to opt into the underlying details will be helpful to make our tools flexible enough.
 
-Furthermore, this is why I like the fluent ORM created by the Vapor team. As they provide:
+Furthermore, this is why I like the [fluent ORM](https://docs.vapor.codes/fluent/advanced/) created by the [Vapor team](https://docs.vapor.codes). As they provide:
 A low-level raw SQL client.
 A SQL query builder based on existing data classes.
 A high-level ORM that fulfills common use cases.
