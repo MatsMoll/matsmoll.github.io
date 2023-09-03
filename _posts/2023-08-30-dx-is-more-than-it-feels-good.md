@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "DX is more than 'It Feels Good'"
+title: "DX can be more than just 'It Feels Good'"
 categories: [DX, UX, Software Design]
 permalink: /posts/dx-is-more-than-it-feels-good
 ---
