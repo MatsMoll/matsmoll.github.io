@@ -5,7 +5,7 @@ categories: [DX, UX, Software Design]
 permalink: /posts/dx-is-more-than-it-feels-good
 ---
 
-Many developers often lean towards tools that "feel good" and argue they have good Developer Experience (DX). However, this subjective measure of "feel good" is rooted in past experiences and familiarity with similar tools, making the argument of "good DX" worthless. Furthermore, relying solely on what feels comfortable can hinder innovation and limit our perspective. Instead, a more objective way of measuring DX and evaluating code quality will be needed if we continue using the term DX.
+Many developers often lean towards tools that "feel good" and argue they have good Developer Experience (DX). However, this subjective measure of "feel good" is rooted in past experiences and familiarity with similar tools, making the argument of "good DX" worthless. Which is also something ThePrimeagen have argued for. Furthermore, relying solely on what feels comfortable can hinder innovation and limit our perspective. Instead, a more objective way of measuring DX and evaluating code quality will be needed if we continue using the term DX.
 
 Therefore, using more tried-and-tested principles can benefit this debate. However, I am not proposing to use principles like [SOLID](https://en.wikipedia.org/wiki/SOLID), [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself), or [Clean Code](https://books.google.no/books/about/Clean_Code.html?id=hjEFCAAAQBAJ&source=kp_book_description&redir_esc=y); I'm instead proposing to use existing UX principles and apply them across different programming languages, frameworks, and paradigms.
 
