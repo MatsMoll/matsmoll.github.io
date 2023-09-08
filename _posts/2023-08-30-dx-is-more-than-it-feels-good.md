@@ -97,8 +97,6 @@ def area(size: Size) -> int:
 Since `pydantic` throws when the data pattern is invalid, will `pydantic`, as a result, ensure our system state.
 Therefore, only `pydantic` will make our system state more visible, as we know that our `Size` object contains the expected state that we want.
 
-This is what I dislike about TypeScript, as we quickly get a false perception about our system state. Furthermore, showing the result of automated tests in a CI can also help present the system state.
-
 ### Help users recognize, diagnose, and recover from errors
 > Error messages should be expressed in plain language (no error codes), precisely indicate the problem, and constructively suggest a solution.
 > 
