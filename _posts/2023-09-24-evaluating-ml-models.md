@@ -5,17 +5,15 @@ categories: [AI, ML, Evaluation]
 permalink: /posts/evaluating-ai-models-in-production
 ---
 
-Knowing how well an AI model performs is essential to deliver good AI products confidently. Therefore, a common practice is to have a dedicated data set used for evaluation when training our model.
+Knowing the performance of an AI model is key to confidently delivering superior AI products. As such, it's common practice to set aside a specific dataset for evaluation during the training phase of our model.
 
-Even though such an evaluation process is valuable and often finds out if the model is good enough, it may still have flaws.
+While this evaluation process is quite valuable and usually helps determine if the model is good enough, it's not without its drawbacks.
 
-The main issue is that it may not actually represent accurate performance metrics. Furthermore, there are an incredible amount of different data errors that could happen. E.g., leaking information either through features or time. 
-Therefore, inaccurate performance metrics can quickly happen if we have such data errors, making the evaluation reports misleading or invalid. 
-As a result, the most accurate way to monitor a model is through production.
+The primary issue here is that the evaluation might not provide accurate performance metrics. Moreover, there's a wide array of data errors that could come into play, for instance, leaking information either through features or over time. Consequently, if such data errors occur, they could quickly lead to inaccurate performance metrics, making the evaluation reports misleading or invalid. As a result, the most precise way to gauge a model's performance is through monitoring it in production.
 
 However, evaluating the model performance in production can often be down-prioritized or an afterthought. Potentially ending up in a situation where we never add evaluation in production.
 
-However, evaluating models in production is simple in theory.
+Yet, the concept of evaluating models in production is, in essence, straightforward.
 
 ## What is needed?
 There are two things needed to measure performance in production.
