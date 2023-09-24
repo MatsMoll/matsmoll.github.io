@@ -1,13 +1,11 @@
 ---
 layout: post
-title: "DX can be more than just 'It Feels Good'"
-categories: [DX, UX, Software Design]
-permalink: /posts/dx-is-more-than-it-feels-good
+title: "Evaluating AI Models in Production"
+categories: [AI, ML, Evaluation]
+permalink: /posts/evaluating-ai-models-in-production
 ---
 
-# Evaluating AI Models in Production
-
-Knowing how well an AI model is performing is essential. Therefore, a common practice is to have a dedicated data set used for evaluation when training our model.
+Knowing how well an AI model performs is essential to deliver good AI products confidently. Therefore, a common practice is to have a dedicated data set used for evaluation when training our model.
 
 Even though such an evaluation process is valuable and often finds out if the model is good enough, it may still have flaws.
 
