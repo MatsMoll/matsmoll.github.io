@@ -50,15 +50,15 @@ from aligned import PostgreSQLConfig, UUID, Int32
 db = PostgreSQLConfig(env_var="PSQL_URL")
 
 @feature_view(
-	name="trip",
-	batch_source=db.table("trips")
+    name="trip",
+    batch_source=db.table("trips")
 )
 class Trip:
-	trip_id = UUID().as_entity()
+    trip_id = UUID().as_entity()
 
-	duration = Int32()
+    duration = Int32()
 	
-	number_of_passengers = Int32()
+    number_of_passengers = Int32()
 ```
 
 The code above defines the schema we have stored in the Postgres database named `trips`. At the same time, we have specified that we will select the features using `trip_id` as the "identifier" or entity. 
@@ -72,14 +72,14 @@ from trips import Trip, db
 trip = Trip()
 
 @model_contract(
-	name="trip_duration",
-	features=[trip.number_of_passengers, ...],
-	predictions_source=db.table("trip_predictions")
+    name="trip_duration",
+    features=[trip.number_of_passengers, ...],
+    predictions_source=db.table("trip_predictions")
 )
 class PredictedTrips:
-	trip_id = UUID().as_entity()
+    trip_id = UUID().as_entity()
 	
-	predicted_duration = trip.duration.as_regression_label()
+    predicted_duration = trip.duration.as_regression_label()
 ```
 
 Again, the above code defines a model contract where we list the features that we use as input to the model, the table used to store the predictions in, that we will query the predictions using the `trip_id`, and that the `trip.duration` column is the label that we predict.
@@ -96,14 +96,14 @@ store = FeatureStore.from_dir(".")
 db = PostgreSQLConfig("PSQL_URL")
 
 entities = db.fetch("""
-	SELECT trip_id
-	FROM finished_trips_view
+    SELECT trip_id
+    FROM finished_trips_view
 """)
 
 eval = await store.model("trip_duration")\
-	.with_labels()\
-	.predictions_for(entities)\
-	.to_pandas()
+    .with_labels()\
+    .predictions_for(entities)\
+    .to_pandas()
 
 mse = mean_square_error(eval.predictions, eval.ground_truths)
 ```
