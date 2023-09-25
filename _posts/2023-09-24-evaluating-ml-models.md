@@ -5,9 +5,9 @@ categories: [AI, ML, Evaluation]
 permalink: /posts/evaluating-ai-models-in-production
 ---
 
-Knowing the performance of an AI model is key to confidently delivering superior AI products. As such, it's common practice to set aside a specific dataset for evaluation during the training phase of our model.
+**Knowing the performance of an AI model is key to confidently delivering superior AI products. As such, it's common practice for supervised learning models to set aside a specific dataset for evaluation during the training phase of our model.**
 
-While this evaluation process is quite valuable and usually helps determine if the model is good enough, it's not without its drawbacks.
+**While this evaluation process is quite valuable and usually helps determine if the model is good enough, it's not without its drawbacks.**
 
 The primary issue here is that the evaluation might not provide accurate performance metrics. Moreover, there's a wide array of data errors that could come into play, for instance, leaking information either through features or over time. Consequently, if such data errors occur, they could quickly lead to inaccurate performance metrics, making the evaluation reports misleading or invalid. As a result, the most precise way to gauge a model's performance is through monitoring it in production.
 
