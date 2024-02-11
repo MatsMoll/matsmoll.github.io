@@ -7,7 +7,7 @@ permalink: /posts/the-dbt-of-ai
 
 AI is evolving rapidly with new models every day. However, it is easy to get lost in the hype of new models and forget how AI will be integrated at a system-wide level.
 
-I missed such system-wide tooling, so I created [`aligned`](https://github.com/MatsMoll/aligned) to make it easier to understand, develop, and evaluate AI and ML data products.
+I missed such system-wide tooling, so I created [aligned](https://github.com/MatsMoll/aligned) to make it easier to understand, develop, and evaluate AI and ML data products.
 
 ## My Annoyances
 Before we delve into my goals with `aligned`, it is important to understand what I felt was missing in the current AI stack.
@@ -225,4 +225,4 @@ The AI landscape has evolved a lot in the past years, and we have a lot of good 
 
 As a result, I developed `aligned`, which tries to manage the data from AI products. Therefore, somewhat becoming the DBT of AI. As a result, `aligned` simplifies the development, management, and understanding of how our AI products actually behave.
 
-So if this is interesting, try out [`aligned`](https://github.com/MatsMoll/aligned) and let me know what can be done to improve it further.
+So if this is interesting, try out [aligned](https://github.com/MatsMoll/aligned) and let me know what can be done to improve it further.
