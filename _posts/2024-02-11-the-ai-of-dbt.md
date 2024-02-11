@@ -58,7 +58,7 @@ classifier = KNeighborsClassifier(
 
 If any of these keys are missing, or potentially in the incorrect data type, this pipeline can fail. For example, if an integer is loaded as a string.
 Rather, I want these implicit schemas to be defined explicitly, making it possible to fail faster and make it clearer which information is available.
-One example could be [`pydantic`](https://pypi.org/project/pydantic/), and it shows how usefull explicity definition of schemas can be.
+One example could be [`pydantic`](https://pypi.org/project/pydantic/), and it shows how usefull explicit definition of schemas can be.
 
 ### Implicit Logic
 Another issue I found was that getting a Birds Eye view of our AI products was hard.
@@ -225,5 +225,6 @@ Just look at how we can ask for the `question_embedding`, and it knows that you 
 The AI landscape has evolved a lot in the past years, and we have a lot of good tooling to simplify the development of AI products. However, managing ML products on a system scale still needs a lot of implicit knowledge. Something that can also lead to extra work, longer onboarding times, and confusion.
 
 As a result, I developed `aligned`, which tries to manage the data from AI products. Therefore, somewhat becoming the DBT of AI. As a result, `aligned` simplifies the development, management, and understanding of how our AI products actually behave.
+I have only touched the surface of what `aligned` can do, but hopefully it shows some of the potential.
 
 So if this is interesting, try out [aligned](https://github.com/MatsMoll/aligned) and let me know what can be done to improve it further.
