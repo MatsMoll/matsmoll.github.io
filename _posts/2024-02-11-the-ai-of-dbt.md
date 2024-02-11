@@ -5,8 +5,6 @@ categories: [Data Managment, AI Products]
 permalink: /posts/the-dbt-of-ai
 ---
 
-# The DBT of AI
-
 AI is evolving rapidly with new models every day. However, it is easy to get lost in the hype of new models and forget how AI will be integrated at a system-wide level.
 
 I missed such system-wide tooling, so I created [`aligned`](https://github.com/MatsMoll/aligned) to make it easier to understand, develop, and evaluate AI and ML data products.
@@ -68,7 +66,7 @@ Furthermore, the technical documentation was either missing or out of date.
 
 Therefore, questions such as “what are the goals of the model,” “who owns the model,” “which data are needed to run the model,” “what are we predicting,” “where do we store predictions,” “where can I run the model,” “how often do we expect the model to run,” “where do we store training datasets,” and so much more were left unanswered.
 
-Often I found that a lot of these questions were described in code, but outdated in the docs.
+Often I found that a lot of these questions were described implicitly in code, but outdated in the docs.
 
 ### Default Implementation
 Implicit logic and implicit schemas are somewhat similar. However, defining both of them can at first seem like more of a pain than anything.
@@ -220,7 +218,7 @@ But it also makes it possible to prune unneeded transformations and debug transf
 Test data transformations
 </video>
 
-Just look at how we can ask for feature x, and it knows that you need to provide y and z.
+Just look at how we can ask for the `question_embedding`, and it knows that you need to provide a `question` and a `description`.
 
 ## Conclusion
 The AI landscape has evolved a lot in the past years, and we have a lot of good tooling to simplify the development of AI products. However, managing ML products on a system scale still needs a lot of implicit knowledge. Something that can also lead to extra work, longer onboarding times, and confusion.
