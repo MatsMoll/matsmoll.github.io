@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "How I created an end-to-end ML platform for a personal banking AI"
-categories: [ML Ops, AI Products]
+categories: [MLOps, AI Products]
 permalink: /posts/end-to-end-banking-ai
 ---
 
@@ -182,11 +182,11 @@ Therefore, we can define that we have an MLFlow model, served at a specific url.
         model_name="transaction_category",
         model_alias="Champion",
 
-        prediction_column="predicted_catagory",
+        prediction_column="predicted_category",
         predicted_at_column="predicted_at",
     ),
     output_source=FileSource.parquet_at(
-        "transaction_catagory_preds.parquet"
+        "transaction_category_preds.parquet"
     )
 )
 class TransactionCategory:
