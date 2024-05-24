@@ -5,9 +5,6 @@ categories: [MLOps, AI Products]
 permalink: /posts/end-to-end-banking-ai
 ---
 
-**This is still a draft, so changes may happen.**
-
-
 This Christmas I wanted to set my-self a fun challenge. I wanted to create an end-to-end AI product, with model serving, with performance monitoring, with a data catalog, with propper data engineering, with orchestration, with an iOS front-end, and running only on local compute. Not to much to ask, right?
 
 ## The ML Problem
