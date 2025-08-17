@@ -18,15 +18,15 @@ The fix? Add smoke tests that run the pipeline end-to-end with tiny, synthetic d
 ## Why small-scale smoke tests work
 The idea is simple: run your pipeline from start to finish using data that’s easy to generate and doesn’t require big hardware. The goal isn’t to prove the model is good — it’s to prove the pipeline still runs and still respects its expected input and output formats.
 
-With this approach, you can catch schema mismatches, broken preprocessing logic, or missing dependencies before you commit to running a full training job.
+With this approach, you can catch schema changes, broken preprocessing logic, or missing dependencies before you commit to running a full training job.
 
 ## Generating synthetic data
 You can create synthetic test data in two main ways:
 
 - Fully randomised data — great for checking that schemas match and code runs, without caring about meaning.
-- Partially controlled data — lets you embed obvious patterns so you can confirm the model can still detect them.
+- Partially controlled data — lets you embed known patterns so you can confirm the model can still detect them.
 
-If you’re working with a framework that defines your data contracts or feature views, you can often generate random data directly from those definitions. For example here is an example using aligned and the wine quality dataset:
+If you’re working with a framework that defines your data contracts or feature views, you can often generate random data directly from those definitions. Here is an example using [aligned](https://github.com/MatsMoll/aligned) and the wine quality dataset:
 
 ```python
 @data_contract()
@@ -45,7 +45,7 @@ class WineQuality:
            
     quality = Int64().bounded_between(0, 10)
     
-df = await WineQuality.examples(n=100).to_polars()
+df = await WineQuality.n_examples(100).to_polars()
 ```
 
 This contract enforces valid value ranges, or infer defaults based on the data types — which means we can safely auto-fill any column we don’t explicitly set.
@@ -61,7 +61,7 @@ We’ll specify just those two columns, and let the rest be random within their 
 from aligned.source import RandomDataSource
 
 patterned_source = RandomDataSource.with_values({
-    "alcohol": [10, 13, 15, 9, 14],
+    "alcohol": [11, 13, 15, 9, 14],
     "quality": [4, 8, 8, 4, 8]
 })
 
@@ -71,11 +71,7 @@ store = store.update_source_for(
     patterned_source
 )
 ```
-Because the other columns in WineQuality aren’t defined here, they’ll be filled in automatically with valid random values. However, all rows will have the same random value, creating a strong deterministic relationship between the alcohol and quality columns.
-
-## Loading the training dataset
-With the partial data source set up this way, when you load the dataset, you’ll get multiple rows where the columns you didn’t specify have the same random value repeated across all rows. This means those filler features don’t add noise or variation row-to-row.
-
+Because the other columns in WineQuality aren’t defined here, they’ll be filled in automatically with valid random values. However, all rows will have the same random value, creating a strong deterministic relationship between the alcohol and quality columns. With that setup, we can now load the dataset and train a model.
 
 ```python
 from sklearn.ensemble import RandomForestClassifier
@@ -88,23 +84,25 @@ y = df["quality"]
 model = RandomForestClassifier().fit(X, y)
 ```
 
-Because only alcohol varies between rows, the model will rely primarily on it to learn the relationship with quality. This setup provides a simple, deterministic signal that’s easy for the model to detect while keeping tests lightweight and fast.
 
 ## Generating prediction samples
-You can now generate new prediction samples by defining only the features that matter for your rule — here, alcohol — and letting everything else be random:
+Now that we have a model, let's make some predictions to test and validate that the model picked up on the known pattern.
+
+Thakfully we can generate new prediction samples by defining only the features that matter for your pattern — here, alcohol — and letting everything else be random:
 
 ```python
 pred_df = await store.contract(WineQuality).select(X.columns).features_for({
     "alcohol": [11, 14]
-}).to_pandas()
+}).to_polars()
 
 preds = model.predict(pred_df)
 
-print(pred_df, preds)
-# Expected: 11 → quality=4, 14 → quality=8
+assert preds.to_list() == [4, 8]
 ```
 
-If your preprocessing and training logic are correct, the model should reproduce the rule, even with all other features being noise.
+If your preprocessing and training logic are correct, the model should reproduce the pattern.
+
+## Conclusion
 
 Why this works well for smoke tests
 This style of testing gives you both:
