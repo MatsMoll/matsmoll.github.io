@@ -58,8 +58,8 @@ This contract enforces valid value ranges, or infer defaults based on the data t
 
 Random data is good, but sometimes you need controlled patterns.
 
-## Defining only a few columns with RandomDataSource
-Let’s make a simple rule:
+## Defining a known pattern
+Let’s make a known pattern with the following rules:
 - Wines with alcohol > 12 get quality = 8
 - Wines with alcohol <= 12 get quality = 4
 
