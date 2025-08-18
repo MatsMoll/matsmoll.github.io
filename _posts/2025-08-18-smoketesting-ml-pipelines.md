@@ -17,7 +17,7 @@ These problems aren’t glamorous, but they’re the ones that break production 
 The fix? Add smoke tests that run the pipeline end-to-end with tiny, synthetic datasets.
 
 
-## Why small-scale smoke tests work
+## Why smoke tests work
 The idea is simple: run your pipeline end-to-end using synthetic data that doesn’t need big hardware. The goal isn’t to prove the model is good — it’s to prove the pipeline still runs and still respects its expected input and output formats.
 
 With this approach, you can catch schema changes, broken preprocessing logic, or missing dependencies before you commit to running a full training job.
