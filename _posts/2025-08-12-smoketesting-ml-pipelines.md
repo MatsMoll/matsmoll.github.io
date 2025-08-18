@@ -5,7 +5,8 @@ categories: [ML Testing, CI/CD]
 permalink: /posts/smoke-testing-ml-pipelines
 ---
 
-When working on machine learning pipelines, most of the bugs you’ll encounter won’t be “the model isn’t accurate enough.”
+When working on machine learning pipelines, most bugs aren’t about bad models — they’re about broken plumbing.
+
 They’ll be things like:
 
 - A preprocessing step crashing because a column is missing.
@@ -15,10 +16,15 @@ They’ll be things like:
 These problems aren’t glamorous, but they’re the ones that break production the fastest.
 The fix? Add smoke tests that run the pipeline end-to-end with tiny, synthetic datasets.
 
+
 ## Why small-scale smoke tests work
-The idea is simple: run your pipeline from start to finish using data that’s easy to generate and doesn’t require big hardware. The goal isn’t to prove the model is good — it’s to prove the pipeline still runs and still respects its expected input and output formats.
+The idea is simple: run your pipeline end-to-end using synthetic data that doesn’t need big hardware. The goal isn’t to prove the model is good — it’s to prove the pipeline still runs and still respects its expected input and output formats.
 
 With this approach, you can catch schema changes, broken preprocessing logic, or missing dependencies before you commit to running a full training job.
+
+A smoke test saves you from an 8-hour training run that crashes on a missing column. Rather it would catch it in seconds. 
+
+So how do we create these datasets?
 
 ## Generating synthetic data
 You can create synthetic test data in two main ways:
@@ -50,6 +56,8 @@ df = await WineQuality.n_examples(100).to_polars()
 
 This contract enforces valid value ranges, or infer defaults based on the data types — which means we can safely auto-fill any column we don’t explicitly set.
 
+Random data is good, but sometimes you need controlled patterns.
+
 ## Defining only a few columns with RandomDataSource
 Let’s make a simple rule:
 - Wines with alcohol > 12 get quality = 8
@@ -60,12 +68,15 @@ We’ll specify just those two columns, and let the rest be random within their 
 ```python
 from aligned.source import RandomDataSource
 
+# Defining the pattern
 patterned_source = RandomDataSource.with_values({
     "alcohol": [11, 13, 15, 9, 14],
     "quality": [4, 8, 8, 4, 8]
 })
 
 store = await ContractStore.from_dir(".")
+
+# Switching to the new data source
 store = store.update_source_for(
     WineQuality,
     patterned_source
@@ -83,12 +94,12 @@ y = df["quality"]
 
 model = RandomForestClassifier().fit(X, y)
 ```
-
+Next, let’s validate the pipeline by predicting on a controlled test-set.
 
 ## Generating prediction samples
 Now that we have a model, let's make some predictions to test and validate that the model picked up on the known pattern.
 
-Thakfully we can generate new prediction samples by defining only the features that matter for your pattern — here, alcohol — and letting everything else be random:
+Thankfully we can generate new prediction samples by defining only the features that matter for your pattern — here, alcohol — and letting everything else be random:
 
 ```python
 pred_df = await store.contract(WineQuality).select(X.columns).features_for({
@@ -100,15 +111,14 @@ preds = model.predict(pred_df)
 assert preds.to_list() == [4, 8]
 ```
 
-If your preprocessing and training logic are correct, the model should reproduce the pattern.
+With this, we can finally check that our pipeline loads the correct data and trains a model that finds the known pattern.
+Furthermore, if you connect a proper model registry to this pipeline could you also test that those integrations work as expected.
 
 ## Conclusion
+Smoke tests won’t guarantee that your model is cutting-edge, but they will guarantee that your pipeline is alive and dependable. By mixing randomized data for schema validation with controlled patterns for behavioral checks, you catch the kinds of issues that cause real outages. Missing columns, broken preprocessing, or silent feature drops.
 
-Why this works well for smoke tests
-This style of testing gives you both:
+You can even extend these tests beyond data and training by wiring in a model registry. Verifying that a trained model can be stored, retrieved, and reloaded successfully gives you end-to-end confidence — from raw data all the way to deployable artifacts.
 
-End-to-end execution — all features are present, pipeline runs without crashing.
+These checks are fast, cheap, and easy to automate. Making them perfect for CI / CD. Enabling us to check every code change in seconds, long before you commit resources to a full training run. The result is fewer surprises, faster iteration, and more confidence that your pipeline is doing what you expect. So when it’s time to improve accuracy, you can focus on the model, not firefighting infrastructure.
 
-Behavioural verification — you know the correct outputs for certain inputs, so you can test that the model’s logic is intact.
-
-It’s a lightweight but powerful check you can run before heavy training, making it perfect for CI/CD.
+For more details on using aligned, check out the [project on GitHub](https://github.com/MatsMoll/aligned) or its [documentation](https://www.aligned.codes/).
