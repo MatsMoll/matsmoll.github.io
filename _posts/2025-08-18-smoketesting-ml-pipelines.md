@@ -11,7 +11,7 @@ They’ll be things like:
 
 - A preprocessing step crashing because a column is missing.
 - Data arriving in a slightly different format than your code expects.
-- A key feature is accidentally dropped during processing, and the model trains without it
+- The input schema for the model doesn’t match the data provided at inference.
 
 These problems aren’t glamorous, but they’re the ones that break production the fastest.
 The fix? Add smoke tests that run the pipeline end-to-end with tiny, synthetic datasets.
